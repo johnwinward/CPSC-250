@@ -36,14 +36,29 @@ int main()
 	cout << "The return value of the iterative rabbit function is " << res << endl;
 	cout << "Running time for the function is " << static_cast<double>(stop - start)
 		<< endl; //in miliseconds
-	cout << endl;
 
 	//recursive writeBackward function
-	cout << "The output for the writeBackward function is ";
+	cout << endl << "The output for the writeBackward function is ";
 	start = clock();
 	writeBackward(s);
 	stop = clock();
 	cout << endl << "Running time for the function is " << static_cast<double>(stop - start) << endl;
+
+	//iterative writeBackward function
+	cout << endl << "The output for the writeBackward function is ";
+	start = clock();
+	IterativewriteBackward(s);
+	stop = clock();
+	cout << endl << "Running time for the function is " << static_cast<double>(stop - start) << endl;
+
+	//iterative binary search function
+	cout << endl << "The index of the number in the array is ";
+	start = clock();
+	res = IterativeBinarySearch(array, SIZE2, 123123);
+	stop = clock();
+	cout << res;
+	cout << endl << "Running time for the function is " << static_cast<double>(stop - start) << endl;
+
 
 	system("pause");
 	return 0;
@@ -81,9 +96,36 @@ int IterativeRabbit(int n)
 
 void writeBackward(string s)
 {
-	if (s.size() > 1)
+	if (s.size() >= 1)
 	{
 		cout << s.substr(s.size() - 1, 1);
 		writeBackward(s.substr(0, s.size() - 1));
 	}
+}
+
+void IterativewriteBackward(string s)
+{
+	string new_s;
+	for (int i = s.length(); i >= 0; i--)
+	{
+		new_s += s.substr(i, 1);
+	}
+	cout << new_s;
+}
+
+int IterativeBinarySearch(int array[], int size, int target)
+{
+	int first = 0, last = size - 1;
+	int index = size / 2;
+	while (last - first > 1)
+	{
+		index = (last - first) / 2 + first;
+		if (array[index] < target)
+			first = index;
+		else if (array[index] > target)
+			last = index;
+		else if (array[index] == target)
+			return index;
+	}
+	return -1;
 }
