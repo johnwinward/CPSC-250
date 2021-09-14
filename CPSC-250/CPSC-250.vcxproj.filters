@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="recursive.cpp">
+    <ClCompile Include="HandsOn1-2b.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
