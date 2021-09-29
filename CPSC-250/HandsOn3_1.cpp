@@ -27,7 +27,7 @@ int main()
 	double timeB;
 	int n;
 
-	//Setup table
+	//Setup table output
 	cout << setw(COLUMN_WIDTH) << left << "n Value" << setw(COLUMN_WIDTH) << "Result of A" << 
 		setw(COLUMN_WIDTH) << "Result of B" << setw(COLUMN_WIDTH) << "Time of A (s)" << setw(COLUMN_WIDTH) << "Time of B (s)" << endl;
 
@@ -46,7 +46,7 @@ int main()
 
 	printRow(n, resultA, resultB, timeA, timeB);
 
-	//Test for n = 10
+	//Repeat for n = 10
 	n = 10;
 
 	start = clock();
