@@ -28,7 +28,7 @@ int main()
 	int n;
 
 	//Setup table
-	cout << setw(COLUMN_WIDTH) << left << "n Value" << setw(COLUMN_WIDTH) << "Result of A" << 
+	cout << setw(COLUMN_WIDTH) << left << "n Value" << setw(COLUMN_WIDTH) << "Result of A" <<
 		setw(COLUMN_WIDTH) << "Result of B" << setw(COLUMN_WIDTH) << "Time of A (s)" << setw(COLUMN_WIDTH) << "Time of B (s)" << endl;
 
 	//Test both loops with input size of 3, print row of results
@@ -128,8 +128,8 @@ int main()
 int loopA(int n)
 {
 	int sum = 0;
-	for(int i = 1; i <= n; i++)
-		for(int j = 1; j <= 10000; j++)
+	for (int i = 1; i <= n; i++)
+		for (int j = 1; j <= 10000; j++)
 			sum = sum + j;
 	return sum;
 }
@@ -139,12 +139,13 @@ int loopB(int n)
 	int sum = 0;
 	for (int i = 1; i <= n; i++)
 		for (int j = 1; j <= n; j++)
-			sum = sum + j;
+			for (int k = 1; k <= j; k++)
+				sum = sum + k;
 	return sum;
 }
 
 void printRow(int n, unsigned long long int sA, unsigned long long int sB, double tA, double tB)
 {
-	cout << setw(COLUMN_WIDTH) << n << setw(COLUMN_WIDTH) << sA << setw(COLUMN_WIDTH) << sB << 
+	cout << setw(COLUMN_WIDTH) << n << setw(COLUMN_WIDTH) << sA << setw(COLUMN_WIDTH) << sB <<
 		setw(COLUMN_WIDTH) << tA << setw(COLUMN_WIDTH) << tB << endl;
 }
