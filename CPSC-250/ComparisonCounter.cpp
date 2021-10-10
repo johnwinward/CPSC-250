@@ -78,15 +78,15 @@ void merge(int a[], int first, int mid, int last)
 	int* temp = new int[size];
 	int l = first, r = mid + 1, index = 0;
 	
-	while (index < size)
+	while (l <= mid && r <= last)
 	{
-		if (a[l] < a[r])
+		if (a[l] <= a[r])
 		{
 			temp[index] = a[l];
 			index++;
 			l++;
 		}
-		else
+		else if(a[r] < a[l])
 		{
 			temp[index] = a[r];
 			index++;
@@ -94,9 +94,21 @@ void merge(int a[], int first, int mid, int last)
 		}
 	}
 
-	for (int i = 0; i < size; i++)
-		cout << temp[i] << " ";
-	cout << endl;
+	while (index < size)
+	{
+		if (l <= mid)
+		{
+			temp[index] = a[l];
+			index++;
+			l++;
+		}
+		else if (r <= last)
+		{
+			temp[index] = a[r];
+			index++;
+			r++;
+		}
+	}
 
 	index = 0;
 	for (int i = first; i <= last; i++)
