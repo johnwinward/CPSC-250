@@ -13,6 +13,10 @@ struct TreeNode
 	TreeNode* right;
 };
 
+void preOrder(TreeNode* r);
+void inOrder(TreeNode* r);
+void postOrder(TreeNode* r);
+
 int main()
 {
 	//Initialize root of binary tree
