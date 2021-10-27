@@ -48,13 +48,18 @@ void inOrder(TreeNode* node)
 
 void insert(TreeNode*& node, int num)
 {
-	TreeNode newNode;
-	newNode.left = NULL;
-	newNode.right = NULL;
-	newNode.info = num;
-	while (node != NULL)
-		node = node->left;
-	node = &newNode;
+	if (node == NULL)
+	{
+		TreeNode newNode;
+		node = &newNode;
+		node->left = NULL;
+		node->right = NULL;
+		node->info = num;
+	}
+	else if (num < node->info)
+		insert(node->left, num);
+	else
+		insert(node->right, num);
 }
 
 int countNodes(TreeNode* node)
