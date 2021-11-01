@@ -24,12 +24,21 @@ int main() {
 	int size = 10;
 
 	//print original array
+	cout << "Original Array: ";
 	printArray(A, size);
 
 	//create heap from array
 	build_heap(A, size);
 
 	//test output
+	cout << "Heap Array: ";
+	printArray(A, size);
+
+	//insert 20 into heap
+	heapInsert(A, size, 20);
+
+	//test output
+	cout << "Heap with 20 inserted: ";
 	printArray(A, size);
 
 	system("pause");
@@ -86,9 +95,20 @@ void build_heap(int A[], int size) {
 
 //Outputs an array
 void printArray(int A[], int size) {
-	cout << "Array: ";
 	for (int i = 0; i < size; i++)
 		cout << A[i] << " ";
 	cout << endl;
 }
 
+void heapInsert(int A[], int& size, int item) {
+	int currentNode = 0; //set node to root
+	while (getLeftChild(currentNode) <= size)
+		currentNode = getLeftChild(currentNode);
+	if (getLeftChild(currentNode) <= size)
+		A[getRightChild(currentNode)] = item;
+	else
+		A[getLeftChild(currentNode)] = item;
+	size++;
+	for(int i = size / 2 - 1; i >= 0; i--)
+		heapify(A, i, size);
+}
