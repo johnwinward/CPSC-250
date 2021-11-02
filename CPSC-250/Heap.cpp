@@ -1,6 +1,6 @@
 /*
 	John Winward
-	10/29/2021
+	11/2/2021
 	CPSC 250
 	Hands-On Exercise 7: Heaps and Priority Queues
 */
@@ -34,11 +34,24 @@ int main() {
 	cout << "Heap Array: ";
 	printArray(A, size);
 
+	//test getLeftChild
+	cout << "The left child of " << A[0] << " is " << A[getLeftChild(0)] << "." << endl;
+
+	//test getRightChild
+	cout << "The right child of " << A[0] << " is " << A[getRightChild(0)] << "." << endl;
+
 	//insert 20 into heap
 	heapInsert(A, size, 20);
 
 	//test output
 	cout << "Heap with 20 inserted: ";
+	printArray(A, size);
+
+	//insert 17
+	heapInsert(A, size, 17);
+
+	//test output
+	cout << "Heap with 17 inserted: ";
 	printArray(A, size);
 
 	system("pause");
@@ -101,14 +114,11 @@ void printArray(int A[], int size) {
 }
 
 void heapInsert(int A[], int& size, int item) {
-	int currentNode = 0; //set node to root
-	while (getLeftChild(currentNode) <= size)
-		currentNode = getLeftChild(currentNode);
-	if (getLeftChild(currentNode) <= size)
-		A[getRightChild(currentNode)] = item;
-	else
-		A[getLeftChild(currentNode)] = item;
 	size++;
-	for(int i = size / 2 - 1; i >= 0; i--)
-		heapify(A, i, size);
+	int index = size - 1;
+	while (index > 0 && A[getParent(index)] < item) {
+		A[index] = A[getParent(index)];
+		index = getParent(index);
+	}
+	A[index] = item;
 }
