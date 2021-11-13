@@ -1,6 +1,6 @@
 /*
 	John Winward
-	11/5/2021
+	11/13/2021
 	CPSC 250
 	Hands-On Exercise 8: Balanced Search Trees
 */
@@ -18,7 +18,7 @@ struct Node {
 };
 
 void inOrder(Node* tree);
-Node* findItem(Node* tree, int targer);
+Node* findItem(Node* tree, int target);
 
 int main() {
 	//Create 2-3 tree:
@@ -106,14 +106,34 @@ int main() {
 	eleven.middle = NULL;
 	eleven.right = NULL;
 
-	//Test inOrder function
+	//Test functions
+	cout << "In-order traversal: ";
 	inOrder(root);
-	cout << endl;
+	cout << "\n\n";
+
+	cout << "Search 50" << endl;
+	if (findItem(root, 50))
+		cout << "Item found.\n\n";
+	else
+		cout << "Item not found.\n\n";
+
+	cout << "Search 100" << endl;
+	if (findItem(root, 100))
+		cout << "Item found.\n\n";
+	else
+		cout << "Item not found.\n\n";
+
+	cout << "Search 21" << endl;
+	if (findItem(root, 21))
+		cout << "Item found.\n\n";
+	else
+		cout << "Item not found.\n\n";
 
 	system("pause");
 	return 0;
 }
 
+//prints an inorder traversal of the tree
 void inOrder(Node* tree) {
 	if (tree) {
 		if (tree->large) {
@@ -131,6 +151,7 @@ void inOrder(Node* tree) {
 	}
 }
 
+//Return a pointer to the node containing target in the tree
 Node* findItem(Node* tree, int target) {
 	if (tree) {
 		if (tree->right) {
@@ -154,4 +175,6 @@ Node* findItem(Node* tree, int target) {
 				return tree;
 		}
 	}
+	else
+		return NULL;
 }
