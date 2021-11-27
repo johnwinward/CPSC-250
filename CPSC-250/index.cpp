@@ -53,18 +53,26 @@ int main() {
 	indexEntry = retrieveNode(idInput, r);
 	cout << "The matched record number is " << indexEntry.acctID << endl;
 
-	//lookup correct account in records, print
-	accounts.clear();
-	accounts.seekg(0);
+	//lookup correct account in records, print (if in database)
+	if (indexEntry.acctID == -1)
+		cout << "Entry not found in database" << endl;
+	else {
+		accounts.clear();	//reset file read position
+		accounts.seekg(0);
 
-	for (int i = 0; i < indexEntry.acctID; i++)
-		accounts.ignore('\n');
-	string account;
-	getline(accounts, account);
-	cout << "Account record from database file:" << endl;
-	cout << setw(20) << "Record #" << setw(20) << "Account ID" << setw(20) << "First Name" << setw(20) << "Last Name" <<
-		setw(20) << "Balance" << endl;
-	cout << account;
+		string account;
+		for (int i = 0; i < indexEntry.acctID; i++)
+			getline(accounts, account);
+
+		cout << "Account record from database file:" << endl;
+		cout << left << setw(16) << "Record #" << setw(16) << "Account ID" << setw(16) << "First Name" << setw(16) << "Last Name"
+			<< "Balance" << endl;
+		for (int i = 0; i < 5; i++) {
+			accounts >> account;
+			cout << setw(16) << account;
+		}
+		cout << endl;
+	}
 
 	accounts.close();
 	system("pause");
@@ -88,15 +96,22 @@ void addNode(IndexEntry entry, BSTNode*& root) {
 }
 
 IndexEntry retrieveNode(long rNum, BSTNode* root) {
-	while (root != NULL){
+	if (root != NULL){
 		if (root->data.recNum < rNum)
-			root = root->right;
+			retrieveNode(rNum, root->right);
 		else if (root->data.recNum > rNum)
-			root = root->left;
+			retrieveNode(rNum, root->left);
 		else
 			return root->data;
 	}
-	cout << "Record not found in BST" << endl;
+	else {
+		cout << "Record not found in BST" << endl;
+		IndexEntry e;
+		e.acctID = -1;
+		e.recNum = -1;
+		return e;
+	}
+		
 }
 
 void inOrder(BSTNode* node)
