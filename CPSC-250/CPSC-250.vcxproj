@@ -19,7 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="index.cpp" />
+    <ClCompile Include="PriorityQueue.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PriorityQueue.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
