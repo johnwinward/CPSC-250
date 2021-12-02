@@ -86,8 +86,6 @@ void hashInsert(int data[], int key) {
 	while (data[pos] != -1) {
 		pos = (hash_function(key) + q * q) % CAPACITY;
 		q++;
-		if (q > CAPACITY)
-			break;
 	}
 	data[pos] = key;
 }
